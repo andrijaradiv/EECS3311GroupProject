@@ -38,9 +38,31 @@ public class CheckoutPage extends JDialog {
                 //add card info to the database
                 //verify the details
                 //printout a msg
+                authorizePayment();
             }
+
+
         });
 
         setVisible(true);
     }
+
+    private void authorizePayment() {
+        String cardName = tfCardName.getText();
+        String cardNum = String.valueOf(tfCardNum.getText());
+        String billAddress = tfAddress.getText();
+        String cvc = String.valueOf(tfCVC.getText());
+        String expirationMonth = tfExpirationMonth.getText();
+        String expirationYear =  tfExpirationYear.getText();
+
+        if (cardNum.isEmpty() || cardName.isEmpty() || billAddress.isEmpty() || cvc.isEmpty() || expirationMonth.isEmpty() || expirationYear.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter all fields",
+                    "Try again",
+                    JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
+
+    //main method to test it
 }
