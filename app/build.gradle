@@ -23,6 +23,7 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:31.1-jre'
     implementation 'com.formdev:flatlaf:3.0'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.32'
 }
 
 application {

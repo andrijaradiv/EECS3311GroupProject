@@ -1,9 +1,6 @@
 package itr0;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,20 +54,8 @@ public class Login extends JDialog{
     }
 
     public static void main(String[] args) {
-        int themeIndex = 4;
         try {
-            if (themeIndex == 1){
-                UIManager.setLookAndFeel( new FlatLightLaf() );
-            }
-            else if(themeIndex == 2){
-                UIManager.setLookAndFeel( new FlatDarkLaf() );
-            }
-            else if(themeIndex == 3){
-                UIManager.setLookAndFeel( new FlatIntelliJLaf() );
-            }
-            else if(themeIndex == 4){
-                UIManager.setLookAndFeel( new FlatDarculaLaf() );
-            }
+            UIManager.setLookAndFeel( new FlatDarculaLaf() );
         } catch( Exception ex ) {
             System.err.println( "Failed to initialize LaF" );
         }
