@@ -6,3 +6,6 @@ build
 
 # Ignore Class Files
 *.class
+
+# Ignore Jar Files
+*.jar
