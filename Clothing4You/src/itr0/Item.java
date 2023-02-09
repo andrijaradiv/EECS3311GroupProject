@@ -7,14 +7,14 @@ public class Item {
     private String category;
     private String size;
     private double price;
-    private String imageUrl;
+    private ImageIcon image;
 
-    public Item(String name, String category,String size, double price, String imageUrl) {
+    public Item(String name, String category,String size, double price, ImageIcon image) {
         this.name = name;
         this.category = category;
         this.size = size;
         this.price = price;
-        this.imageUrl = imageUrl;
+        this.image = image;
     }
 
     public String getName() {
@@ -49,11 +49,11 @@ public class Item {
         this.price = price;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public ImageIcon getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(ImageIcon image) {
+        this.image = image;
     }
 }
