@@ -28,12 +28,19 @@ public class Catalog extends JDialog {
         setLocationRelativeTo(parent);
 
         items = new ArrayList<>();
-        items.add(new Item("T-shirt", "Tops", "M",10.0, new ImageIcon("Tshirt.png")));
-        items.add(new Item("Hoodie", "Tops", "M",20.0, new ImageIcon("Hoodie.png")));
-        items.add(new Item("Jeans", "Bottoms", "M", 30.0, new ImageIcon("Jeans.png")));
-        items.add(new Item("Shorts", "Bottoms", "M",10.0, new ImageIcon("shorts.png")));
-        items.add(new Item("Beanie", "Hats", "M",10.0, new ImageIcon("Beanie.png")));
-        items.add(new Item("Hat", "Hats", "M",10.0, new ImageIcon("Hat.png")));
+        Image tShirt = new ImageIcon("Tshirt.png").getImage();
+        Image hoodie = new ImageIcon("Hoodie.png").getImage();
+        Image jeans = new ImageIcon("Jeans.png").getImage();
+        Image shorts = new ImageIcon("Shorts.png").getImage();
+        Image beanie = new ImageIcon("Beanie.png").getImage();
+        Image hat = new ImageIcon("Hat.png").getImage();
+        items.add(new Item("T-shirt", "Tops", "M",10.0, tShirt));
+        items.add(new Item("Hoodie", "Tops", "M",20.0, hoodie));
+        items.add(new Item("Jeans", "Bottoms", "M", 30.0, jeans));
+        items.add(new Item("Shorts", "Bottoms", "M",10.0, shorts));
+        items.add(new Item("Beanie", "Hats", "M",10.0, beanie));
+        items.add(new Item("Hat", "Hats", "M",10.0, hat));
+
 
 
         model = new DefaultTableModel();
@@ -45,6 +52,7 @@ public class Catalog extends JDialog {
         table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
         catalogPanel.add(scrollPane, BorderLayout.CENTER);
+        table.setDefaultEditor(Object.class, null);
 
 
         JPanel filter = new JPanel();
@@ -102,7 +110,6 @@ public class Catalog extends JDialog {
                 return addToCart;
             }
         });
-        table.setDefaultEditor(Object.class, null);
         setVisible(true);
         updateTable();
 

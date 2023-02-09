@@ -1,15 +1,16 @@
 package itr0;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Item {
     private String name;
     private String category;
     private String size;
     private double price;
-    private ImageIcon image;
+    private Image image;
 
-    public Item(String name, String category,String size, double price, ImageIcon image) {
+    public Item(String name, String category,String size, double price, Image image) {
         this.name = name;
         this.category = category;
         this.size = size;
@@ -49,11 +50,11 @@ public class Item {
         this.price = price;
     }
 
-    public ImageIcon getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(ImageIcon image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 }
