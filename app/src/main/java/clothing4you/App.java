@@ -13,5 +13,7 @@ public class App {
         catch(Exception e){
             System.out.println("Connection failed!");
         }
+
+        Login.main(null);
     }
 }

@@ -1,4 +1,4 @@
-package itr0;
+package clothing4you;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;

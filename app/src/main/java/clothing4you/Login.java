@@ -1,4 +1,4 @@
-package itr0;
+package clothing4you;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 
@@ -11,12 +11,12 @@ import java.awt.event.ActionListener;
 public class Login extends JDialog{
 
 
-    private JPanel loginPanel;
+    private JPanel loginPanel = new JPanel();
     private JTextField tfUsername;
-    private JButton btnLogin;
-    private JButton btnRegister;
+    private JButton btnLogin = new JButton();
+    private JButton btnRegister = new JButton();
     private JPasswordField pfPassword;
-    private JButton btnGuest;
+    private JButton btnGuest = new JButton();
 
     public Login(JFrame parent) {
         super(parent);
