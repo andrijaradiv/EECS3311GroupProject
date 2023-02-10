@@ -1,4 +1,4 @@
-package itr0;
+package clothing4you;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
-public class Register extends JDialog{
+public class Register extends JDialog {
 
     private JPanel registerPanel;
     private JTextField tfName;
@@ -34,12 +34,11 @@ public class Register extends JDialog{
                 char[] password = pfPassword.getPassword();
                 char[] confirmPassword = pfConfirmPass.getPassword();
 
-                if (Arrays.equals(password, confirmPassword)){
+                if (Arrays.equals(password, confirmPassword)) {
                     User user = new User(name, username, email, password);
                     dispose();
                     Login myLogin = new Login(null);
-                }
-                else {
+                } else {
                     JOptionPane.showMessageDialog(registerPanel, "Password do not match", "Erorr", JOptionPane.ERROR_MESSAGE);
                 }
 
@@ -54,7 +53,6 @@ public class Register extends JDialog{
         });
         setVisible(true);
     }
-
 
     private static class User {
         private String name;
