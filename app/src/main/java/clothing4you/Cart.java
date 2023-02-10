@@ -27,7 +27,21 @@ public class Cart {
     }
 
     public double getTotal() {
+        totalPrice = 0.0;
+        for(Item item: items){
+            totalPrice += item.getPrice() * item.getQuantity();
+        }
         return totalPrice + (totalPrice * tax);
     }
+
+    public int getQuantity(){
+        int quantity = 0;
+        for (Item item: items){
+            quantity += item.getQuantity();
+        }
+        return quantity;
+    }
+
+
 }
 
