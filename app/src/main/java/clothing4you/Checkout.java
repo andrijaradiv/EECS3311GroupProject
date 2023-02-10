@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CheckoutPage extends JDialog {
+public class Checkout extends JDialog {
     private JTextField tfCardName;
     private JTextField tfCardNum;
     private JTextField tfAddress;
@@ -16,7 +16,7 @@ public class CheckoutPage extends JDialog {
     private JTextField tfExpirationYear;
     private JPanel checkoutPanel;
 
-    public CheckoutPage(JFrame parent) {
+    public Checkout(JFrame parent) {
         super(parent);
         setTitle("Checkout");
         setContentPane(checkoutPanel);
