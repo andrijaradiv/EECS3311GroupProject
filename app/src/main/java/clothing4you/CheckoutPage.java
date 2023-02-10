@@ -1,4 +1,4 @@
-package clothing4you.itr0;
+package clothing4you;
 
 import javax.swing.*;
 import java.awt.*;
