@@ -56,14 +56,4 @@ public class Login extends JDialog {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel(new FlatDarculaLaf());
-        } catch (Exception ex) {
-            System.err.println("Failed to initialize LaF");
-        }
-
-        Login myLogin = new Login(null);
-    }
-
 }
