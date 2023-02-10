@@ -40,8 +40,6 @@ public class CheckoutPage extends JDialog {
                 //printout a msg
                 authorizePayment();
             }
-
-
         });
 
         setVisible(true);

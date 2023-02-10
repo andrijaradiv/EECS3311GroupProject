@@ -1,4 +1,4 @@
-package itr0;
+package clothing4you.itr0;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 
