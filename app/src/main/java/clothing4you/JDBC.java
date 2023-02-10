@@ -13,6 +13,10 @@ public class JDBC {
             "username TEXT," +
             "password TEXT" +
             ");";
+
+    public JDBC() throws SQLException, ClassNotFoundException {
+    }
+
     private static Connection establishConnection() throws SQLException, ClassNotFoundException {
         // Establishes connection with sqlite database
 
@@ -68,12 +72,30 @@ public class JDBC {
 
         return result;
     }
+
+    public static boolean exists(String data, String table, String column) throws SQLException, ClassNotFoundException {
+        // Checks if data in column in table exists, returns true if it exists and false if it does not
+
+        boolean exists = false;
+        String sqlSearch = "SELECT " + column + " " +
+                "FROM " + table + " " +
+                "WHERE EXISTS " +
+                "(SELECT " + column + " FROM " + table + " WHERE " + column + " = '" + data + "');";
+
+        Connection conn = establishConnection();
+        Statement stmt = conn.createStatement();
+        ResultSet res = stmt.executeQuery(sqlSearch);
+        exists = res.next();
+
+        return exists;
+    }
     // For reference
-//    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 //        createTable("users", createUserTable);
 //        insertUser("andrija", "rad", "a@gmail.com","andrija121", "1234");
 //        insertUser("willy", "lego", "willlego@gmail.com","willo1053", "1234");
 //        ArrayList a = query("users", "username");
 //        System.out.println(a);
-//    }
+//        System.out.println(exists("wow14266", "users", "username"));
+    }
 }
