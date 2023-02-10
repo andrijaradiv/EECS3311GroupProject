@@ -7,15 +7,25 @@ public class Item {
     private String name;
     private String category;
     private String size;
+    private int quantity;
     private double price;
     private Image image;
 
-    public Item(String name, String category,String size, double price, Image image) {
+    public Item(String name, String category,String size, int quantity, double price, Image image) {
         this.name = name;
         this.category = category;
         this.size = size;
+        this.quantity = quantity;
         this.price = price;
         this.image = image;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getName() {
