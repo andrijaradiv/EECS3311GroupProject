@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import com.formdev.flatlaf.FlatDarculaLaf;
 
 public class Checkout extends JDialog {
     private JTextField tfCardName;
@@ -63,4 +64,14 @@ public class Checkout extends JDialog {
     }
 
     //main method to test it
+    public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(new FlatDarculaLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
+
+        Checkout mycheckout = new Checkout(null);
+    }
+
 }
