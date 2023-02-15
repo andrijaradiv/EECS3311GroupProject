@@ -17,12 +17,12 @@ public class Catalog extends JDialog {
     private ArrayList<Item> items;
     private Cart cart;
 
-    ImageIcon tShirt = new ImageIcon("shirt.png");
-    ImageIcon hoodie = new ImageIcon("Hoodie.png");
-    ImageIcon jeans = new ImageIcon("Jeans.png");
-    ImageIcon shorts = new ImageIcon("Shorts.png");
-    ImageIcon beanie = new ImageIcon("Beanie.png");
-    ImageIcon hat = new ImageIcon("Hat.png");
+    ImageIcon tShirt = new ImageIcon("img/shirt.png");
+    ImageIcon hoodie = new ImageIcon("img/Hoodie.png");
+    ImageIcon jeans = new ImageIcon("img/Jeans.png");
+    ImageIcon shorts = new ImageIcon("img/Shorts.png");
+    ImageIcon beanie = new ImageIcon("img/Beanie.png");
+    ImageIcon hat = new ImageIcon("img/Hat.png");
 
     public Catalog(JFrame parent) {
         super(parent);

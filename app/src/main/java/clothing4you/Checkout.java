@@ -17,7 +17,7 @@ public class Checkout extends JDialog {
     private JPanel checkoutPanel;
     private JLabel creditImage;
 
-    ImageIcon creditIcon = new ImageIcon("credit-card.png");
+    ImageIcon creditIcon = new ImageIcon("img/credit-card.png");
 
     public Checkout(JFrame parent) {
         super(parent);

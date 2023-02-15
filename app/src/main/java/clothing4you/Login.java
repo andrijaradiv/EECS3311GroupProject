@@ -17,7 +17,7 @@ public class Login extends JDialog {
     private JButton btnGuest;
     private JLabel iconLabel;
 
-    ImageIcon icon = new ImageIcon("Icon.png");
+    ImageIcon icon = new ImageIcon("img/Icon.png");
 
     public Login(JFrame parent) {
         super(parent);
