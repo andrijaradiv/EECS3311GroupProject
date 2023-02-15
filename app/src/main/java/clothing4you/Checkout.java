@@ -35,6 +35,7 @@ public class Checkout extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                Catalog myCatalog = new Catalog(null);
             }
         });
         submitButton.addActionListener(new ActionListener() {

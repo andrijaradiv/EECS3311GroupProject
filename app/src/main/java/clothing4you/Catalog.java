@@ -1,14 +1,11 @@
 package clothing4you;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -20,7 +17,7 @@ public class Catalog extends JDialog {
     private ArrayList<Item> items;
     private Cart cart;
 
-    ImageIcon tShirt = new ImageIcon("Tshirt.png");
+    ImageIcon tShirt = new ImageIcon("shirt.png");
     ImageIcon hoodie = new ImageIcon("Hoodie.png");
     ImageIcon jeans = new ImageIcon("Jeans.png");
     ImageIcon shorts = new ImageIcon("Shorts.png");
@@ -60,6 +57,12 @@ public class Catalog extends JDialog {
         JScrollPane scrollPane = new JScrollPane(table);
         catalogPanel.add(scrollPane, BorderLayout.CENTER);
         table.setDefaultEditor(Object.class, null);
+
+        table.setRowHeight(120);
+        table.getColumnModel().getColumn(3).setPreferredWidth(120);
+        Dimension tableSize = new Dimension(600, 600);
+        table.setPreferredScrollableViewportSize(tableSize);
+        scrollPane.setPreferredSize(tableSize);
 
 
         JPanel filter = new JPanel();
@@ -134,6 +137,18 @@ public class Catalog extends JDialog {
                 model.addRow(new Object[] { item.getName(), item.getSize(), "$" + String.format("%.2f",item.getPrice()), item.getImage() });
             }
         }
+
+        table.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                JLabel label = new JLabel();
+                if (value != null) {
+                    ImageIcon imageIcon = (ImageIcon) value;
+                    Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                    label.setIcon(new ImageIcon(image));
+                }
+                return label;
+            }
+        });
     }
 
 

@@ -66,7 +66,4 @@ public class Item {
         return image;
     }
 
-    public void setImage(ImageIcon image) {
-        this.image = image;
-    }
 }
