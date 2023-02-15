@@ -15,6 +15,9 @@ public class Checkout extends JDialog {
     private JButton submitButton;
     private JTextField tfExpirationYear;
     private JPanel checkoutPanel;
+    private JLabel creditImage;
+
+    ImageIcon creditIcon = new ImageIcon("credit-card.png");
 
     public Checkout(JFrame parent) {
         super(parent);
@@ -25,6 +28,8 @@ public class Checkout extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
 
+        creditImage.setText("");
+        creditImage.setIcon(creditIcon);
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
@@ -63,4 +68,8 @@ public class Checkout extends JDialog {
     }
 
     //main method to test it
+    public static void main(String[] args) {
+        Checkout chk = new Checkout(null);
+    }
+
 }

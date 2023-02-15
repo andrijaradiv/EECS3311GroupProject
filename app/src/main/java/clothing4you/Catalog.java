@@ -1,11 +1,14 @@
 package clothing4you;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -17,6 +20,13 @@ public class Catalog extends JDialog {
     private ArrayList<Item> items;
     private Cart cart;
 
+    ImageIcon tShirt = new ImageIcon("Tshirt.png");
+    ImageIcon hoodie = new ImageIcon("Hoodie.png");
+    ImageIcon jeans = new ImageIcon("Jeans.png");
+    ImageIcon shorts = new ImageIcon("Shorts.png");
+    ImageIcon beanie = new ImageIcon("Beanie.png");
+    ImageIcon hat = new ImageIcon("Hat.png");
+
     public Catalog(JFrame parent) {
         super(parent);
         setTitle("Catalog");
@@ -27,15 +37,11 @@ public class Catalog extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
 
+
         cart = new Cart();
 
         items = new ArrayList<>();
-        Image tShirt = new ImageIcon("Tshirt.png").getImage();
-        Image hoodie = new ImageIcon("Hoodie.png").getImage();
-        Image jeans = new ImageIcon("Jeans.png").getImage();
-        Image shorts = new ImageIcon("Shorts.png").getImage();
-        Image beanie = new ImageIcon("Beanie.png").getImage();
-        Image hat = new ImageIcon("Hat.png").getImage();
+
         items.add(new Item("T-shirt", "Tops", "M", 1, 20.00, tShirt));
         items.add(new Item("Hoodie", "Tops", "M",1,25.00, hoodie));
         items.add(new Item("Jeans", "Bottoms", "M",1, 20.00, jeans));
