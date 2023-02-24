@@ -53,20 +53,6 @@ public class Register extends JDialog {
         });
         setVisible(true);
     }
-
-    private static class User {
-        private String name;
-        private String username;
-        private String email;
-        private char[] password;
-
-        public User(String name, String username, String email, char[] password) {
-            this.name = name;
-            this.username = username;
-            this.email = email;
-            this.password = password;
-        }
-    }
 }
 
 

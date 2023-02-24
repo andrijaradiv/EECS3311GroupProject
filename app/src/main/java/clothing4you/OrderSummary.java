@@ -39,6 +39,7 @@ public class OrderSummary extends JDialog{
         model.addRow(new Object[]{"Total Price:", "$" + String.format("%.2f",cart.getTotal())});
 
         orderSummaryPanel.add(new JScrollPane(table), BorderLayout.CENTER);
+        table.setDefaultEditor(Object.class, null);
 
         JPanel button = new JPanel();
         JButton back = new JButton("Back");

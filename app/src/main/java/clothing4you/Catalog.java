@@ -66,6 +66,20 @@ public class Catalog extends JDialog {
 
 
         JPanel filter = new JPanel();
+
+        JTextField searchField = new JTextField(10);
+        filter.add(searchField);
+
+        JButton search = new JButton("Search");
+        search.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String query = searchField.getText();
+                performSearch(query);
+            }
+        });
+        filter.add(search);
+
         cmCategory = new JComboBox<String>();
         cmCategory.addItem("All");
         cmCategory.addItem("Tops");
@@ -103,9 +117,22 @@ public class Catalog extends JDialog {
             }
         });
         button.add(checkout);
+
+
+        JButton wishlist = new JButton("My WishList");
+        wishlist.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                WishlistPage myWishList = new WishlistPage(null, cart.getItems());
+            }
+        });
+        button.add(wishlist);
         catalogPanel.add(button, BorderLayout.SOUTH);
 
-        JPanel button1 = new JPanel();
+        JPanel buttonOne = new JPanel();
+        buttonOne.setLayout(new BoxLayout(buttonOne, BoxLayout.Y_AXIS));
+
         JButton addToCart = new JButton("Add To Cart");
         addToCart.addActionListener(new ActionListener() {
             @Override
@@ -120,8 +147,27 @@ public class Catalog extends JDialog {
                 }
             }
         });
-        button1.add(addToCart);
-        catalogPanel.add(button1, BorderLayout.EAST);
+        buttonOne.add(addToCart);
+
+
+        JButton addToWishlist = new JButton("Add To WishList");
+        //wishlist.setPreferredSize(new Dimension(120,30));
+        addToWishlist.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = table.getSelectedRow();
+                if (row != -1) {
+                    Item item = items.get(row);
+                    cart.addItem(item);
+                    JOptionPane.showMessageDialog(catalogPanel, item.getName() + " added to wishlist.");
+                } else {
+                    JOptionPane.showMessageDialog(catalogPanel, "Please select an item that is available.");
+                }
+            }
+        });
+        buttonOne.add(addToWishlist);
+        catalogPanel.add(buttonOne, BorderLayout.EAST);
+
 
 
         setVisible(true);
@@ -149,6 +195,15 @@ public class Catalog extends JDialog {
                 return label;
             }
         });
+    }
+
+    private void performSearch(String query) {
+        model.setRowCount(0);
+        for (Item item : items) {
+            if (item.getName().toLowerCase().contains(query.toLowerCase())) {
+                model.addRow(new Object[] { item.getName(), item.getSize(), "$" + String.format("%.2f",item.getPrice()), item.getImage() });
+            }
+        }
     }
 
 
