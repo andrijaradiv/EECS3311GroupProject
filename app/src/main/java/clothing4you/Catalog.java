@@ -197,10 +197,10 @@ public class Catalog extends JDialog {
         });
     }
 
-    private void performSearch(String query) {
+    private void performSearch(String search) {
         model.setRowCount(0);
         for (Item item : items) {
-            if (item.getName().toLowerCase().contains(query.toLowerCase())) {
+            if (item.getName().toLowerCase().contains(search.toLowerCase())) {
                 model.addRow(new Object[] { item.getName(), item.getSize(), "$" + String.format("%.2f",item.getPrice()), item.getImage() });
             }
         }
