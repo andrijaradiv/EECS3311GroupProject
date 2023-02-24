@@ -16,6 +16,7 @@ public class Catalog extends JDialog {
     private DefaultTableModel model;
     private ArrayList<Item> items;
     private Cart cart;
+    private WishList wl;
 
     ImageIcon tShirt = new ImageIcon("img/shirt.png");
     ImageIcon hoodie = new ImageIcon("img/Hoodie.png");
@@ -36,7 +37,7 @@ public class Catalog extends JDialog {
 
 
         cart = new Cart();
-
+        wl = new WishList();
         items = new ArrayList<>();
 
         items.add(new Item("T-shirt", "Tops", "M", 1, 20.00, tShirt));
@@ -74,8 +75,8 @@ public class Catalog extends JDialog {
         search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String query = searchField.getText();
-                performSearch(query);
+                String search = searchField.getText();
+                performSearch(search);
             }
         });
         filter.add(search);
@@ -128,6 +129,17 @@ public class Catalog extends JDialog {
             }
         });
         button.add(wishlist);
+
+        JButton returnBtn = new JButton("Return");
+        returnBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Return myReturn = new Return(null,cart.getItems());
+            }
+        });
+        button.add(returnBtn);
+
         catalogPanel.add(button, BorderLayout.SOUTH);
 
         JPanel buttonOne = new JPanel();
@@ -158,7 +170,7 @@ public class Catalog extends JDialog {
                 int row = table.getSelectedRow();
                 if (row != -1) {
                     Item item = items.get(row);
-                    cart.addItem(item);
+                    wl.addItem(item);
                     JOptionPane.showMessageDialog(catalogPanel, item.getName() + " added to wishlist.");
                 } else {
                     JOptionPane.showMessageDialog(catalogPanel, "Please select an item that is available.");
@@ -167,7 +179,6 @@ public class Catalog extends JDialog {
         });
         buttonOne.add(addToWishlist);
         catalogPanel.add(buttonOne, BorderLayout.EAST);
-
 
 
         setVisible(true);
