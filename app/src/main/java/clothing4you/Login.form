@@ -11,14 +11,6 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="4e64" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value=""/>
-        </properties>
-      </component>
       <vspacer id="7356c">
         <constraints>
           <grid row="1" column="3" row-span="2" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
@@ -77,6 +69,7 @@
         </constraints>
         <properties>
           <font name="Times New Roman" size="16" style="1"/>
+          <labelFor value="30100"/>
           <text value="Password:"/>
         </properties>
       </component>
@@ -87,6 +80,14 @@
         <properties>
           <font name="Times New Roman" size="16" style="1"/>
           <text value="Continue As Guest"/>
+        </properties>
+      </component>
+      <component id="c4627" class="javax.swing.JLabel" binding="iconLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Label"/>
         </properties>
       </component>
     </children>

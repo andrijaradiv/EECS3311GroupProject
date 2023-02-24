@@ -1,5 +1,8 @@
 package clothing4you;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -14,6 +17,12 @@ public class App {
             System.out.println("Connection failed!");
         }
 
-        Login.main(null);
+        try {
+            UIManager.setLookAndFeel(new FlatDarculaLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
+
+        Login myLogin = new Login(null);
     }
 }

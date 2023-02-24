@@ -17,6 +17,13 @@ public class Catalog extends JDialog {
     private ArrayList<Item> items;
     private Cart cart;
 
+    ImageIcon tShirt = new ImageIcon("img/shirt.png");
+    ImageIcon hoodie = new ImageIcon("img/Hoodie.png");
+    ImageIcon jeans = new ImageIcon("img/Jeans.png");
+    ImageIcon shorts = new ImageIcon("img/Shorts.png");
+    ImageIcon beanie = new ImageIcon("img/Beanie.png");
+    ImageIcon hat = new ImageIcon("img/Hat.png");
+
     public Catalog(JFrame parent) {
         super(parent);
         setTitle("Catalog");
@@ -27,15 +34,11 @@ public class Catalog extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
 
+
         cart = new Cart();
 
         items = new ArrayList<>();
-        Image tShirt = new ImageIcon("Tshirt.png").getImage();
-        Image hoodie = new ImageIcon("Hoodie.png").getImage();
-        Image jeans = new ImageIcon("Jeans.png").getImage();
-        Image shorts = new ImageIcon("Shorts.png").getImage();
-        Image beanie = new ImageIcon("Beanie.png").getImage();
-        Image hat = new ImageIcon("Hat.png").getImage();
+
         items.add(new Item("T-shirt", "Tops", "M", 1, 20.00, tShirt));
         items.add(new Item("Hoodie", "Tops", "M",1,25.00, hoodie));
         items.add(new Item("Jeans", "Bottoms", "M",1, 20.00, jeans));
@@ -54,6 +57,12 @@ public class Catalog extends JDialog {
         JScrollPane scrollPane = new JScrollPane(table);
         catalogPanel.add(scrollPane, BorderLayout.CENTER);
         table.setDefaultEditor(Object.class, null);
+
+        table.setRowHeight(120);
+        table.getColumnModel().getColumn(3).setPreferredWidth(120);
+        Dimension tableSize = new Dimension(600, 600);
+        table.setPreferredScrollableViewportSize(tableSize);
+        scrollPane.setPreferredSize(tableSize);
 
 
         JPanel filter = new JPanel();
@@ -128,6 +137,18 @@ public class Catalog extends JDialog {
                 model.addRow(new Object[] { item.getName(), item.getSize(), "$" + String.format("%.2f",item.getPrice()), item.getImage() });
             }
         }
+
+        table.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                JLabel label = new JLabel();
+                if (value != null) {
+                    ImageIcon imageIcon = (ImageIcon) value;
+                    Image image = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                    label.setIcon(new ImageIcon(image));
+                }
+                return label;
+            }
+        });
     }
 
 

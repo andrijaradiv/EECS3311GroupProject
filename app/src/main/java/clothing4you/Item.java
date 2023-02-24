@@ -9,9 +9,9 @@ public class Item {
     private String size;
     private int quantity;
     private double price;
-    private Image image;
+    private ImageIcon image;
 
-    public Item(String name, String category,String size, int quantity, double price, Image image) {
+    public Item(String name, String category,String size, int quantity, double price, ImageIcon image) {
         this.name = name;
         this.category = category;
         this.size = size;
@@ -19,6 +19,8 @@ public class Item {
         this.price = price;
         this.image = image;
     }
+
+
 
     public int getQuantity() {
         return quantity;
@@ -60,11 +62,8 @@ public class Item {
         this.price = price;
     }
 
-    public Image getImage() {
+    public ImageIcon getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
-    }
 }

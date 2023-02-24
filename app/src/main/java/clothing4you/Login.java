@@ -1,18 +1,13 @@
 package clothing4you;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
 
 import javax.swing.*;
-import javax.swing.plaf.FontUIResource;
-import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Locale;
 
 
 public class Login extends JDialog {
-
 
     private JPanel loginPanel;
     private JTextField tfUsername;
@@ -20,6 +15,9 @@ public class Login extends JDialog {
     private JButton btnRegister;
     private JPasswordField pfPassword;
     private JButton btnGuest;
+    private JLabel iconLabel;
+
+    ImageIcon icon = new ImageIcon("img/Icon.png");
 
     public Login(JFrame parent) {
         super(parent);
@@ -29,6 +27,10 @@ public class Login extends JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
         setLocationRelativeTo(parent);
+
+        iconLabel.setText("");
+        iconLabel.setIcon(icon);
+
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,14 +58,5 @@ public class Login extends JDialog {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        try {
-            UIManager.setLookAndFeel(new FlatDarculaLaf());
-        } catch (Exception ex) {
-            System.err.println("Failed to initialize LaF");
-        }
-
-        Login myLogin = new Login(null);
-    }
 
 }
