@@ -16,6 +16,8 @@ public class Checkout extends JDialog {
     private JButton submitButton;
     private JTextField tfExpirationYear;
     private JPanel checkoutPanel;
+    private JTextField tfPromoCode;
+    private JButton applyButton;
 
     public Checkout(JFrame parent) {
         super(parent);
@@ -40,6 +42,15 @@ public class Checkout extends JDialog {
                 //verify the details
                 //printout a msg
                 authorizePayment();
+            }
+        });
+
+        applyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //based on the promo code: eg 15OFF , 20OFF
+                //subtract 15% of the subtotal we get from the order summary
+                //reflect new subtotal
             }
         });
 
