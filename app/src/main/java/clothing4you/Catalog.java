@@ -16,6 +16,7 @@ public class Catalog extends JDialog {
     private DefaultTableModel model;
     private ArrayList<Item> items;
     private Cart cart;
+    private WishList wl;
 
     ImageIcon tShirt = new ImageIcon("img/shirt.png");
     ImageIcon hoodie = new ImageIcon("img/Hoodie.png");
@@ -36,7 +37,7 @@ public class Catalog extends JDialog {
 
 
         cart = new Cart();
-
+        wl = new WishList();
         items = new ArrayList<>();
 
         items.add(new Item("T-shirt", "Tops", "M", 1, 20.00, tShirt));
@@ -66,6 +67,20 @@ public class Catalog extends JDialog {
 
 
         JPanel filter = new JPanel();
+
+        JTextField searchField = new JTextField(10);
+        filter.add(searchField);
+
+        JButton search = new JButton("Search");
+        search.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String search = searchField.getText();
+                performSearch(search);
+            }
+        });
+        filter.add(search);
+
         cmCategory = new JComboBox<String>();
         cmCategory.addItem("All");
         cmCategory.addItem("Tops");
@@ -103,9 +118,33 @@ public class Catalog extends JDialog {
             }
         });
         button.add(checkout);
+
+
+        JButton wishlist = new JButton("My WishList");
+        wishlist.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                WishlistPage myWishList = new WishlistPage(null, cart.getItems());
+            }
+        });
+        button.add(wishlist);
+
+        JButton returnBtn = new JButton("Return");
+        returnBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Return myReturn = new Return(null,cart.getItems());
+            }
+        });
+        button.add(returnBtn);
+
         catalogPanel.add(button, BorderLayout.SOUTH);
 
-        JPanel button1 = new JPanel();
+        JPanel buttonOne = new JPanel();
+        buttonOne.setLayout(new BoxLayout(buttonOne, BoxLayout.Y_AXIS));
+
         JButton addToCart = new JButton("Add To Cart");
         addToCart.addActionListener(new ActionListener() {
             @Override
@@ -120,8 +159,26 @@ public class Catalog extends JDialog {
                 }
             }
         });
-        button1.add(addToCart);
-        catalogPanel.add(button1, BorderLayout.EAST);
+        buttonOne.add(addToCart);
+
+
+        JButton addToWishlist = new JButton("Add To WishList");
+        //wishlist.setPreferredSize(new Dimension(120,30));
+        addToWishlist.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = table.getSelectedRow();
+                if (row != -1) {
+                    Item item = items.get(row);
+                    wl.addItem(item);
+                    JOptionPane.showMessageDialog(catalogPanel, item.getName() + " added to wishlist.");
+                } else {
+                    JOptionPane.showMessageDialog(catalogPanel, "Please select an item that is available.");
+                }
+            }
+        });
+        buttonOne.add(addToWishlist);
+        catalogPanel.add(buttonOne, BorderLayout.EAST);
 
 
         setVisible(true);
@@ -149,6 +206,15 @@ public class Catalog extends JDialog {
                 return label;
             }
         });
+    }
+
+    private void performSearch(String search) {
+        model.setRowCount(0);
+        for (Item item : items) {
+            if (item.getName().toLowerCase().contains(search.toLowerCase())) {
+                model.addRow(new Object[] { item.getName(), item.getSize(), "$" + String.format("%.2f",item.getPrice()), item.getImage() });
+            }
+        }
     }
 
 
