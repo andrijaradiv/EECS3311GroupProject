@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import com.formdev.flatlaf.FlatDarculaLaf;
 
 public class Checkout extends JDialog {
     private JTextField tfCardName;
@@ -15,9 +16,8 @@ public class Checkout extends JDialog {
     private JButton submitButton;
     private JTextField tfExpirationYear;
     private JPanel checkoutPanel;
-    private JLabel creditImage;
-
-    ImageIcon creditIcon = new ImageIcon("img/credit-card.png");
+    private JTextField tfPromoCode;
+    private JButton applyButton;
 
     public Checkout(JFrame parent) {
         super(parent);
@@ -28,14 +28,11 @@ public class Checkout extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
 
-        creditImage.setText("");
-        creditImage.setIcon(creditIcon);
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Catalog myCatalog = new Catalog(null);
             }
         });
         submitButton.addActionListener(new ActionListener() {
@@ -45,6 +42,15 @@ public class Checkout extends JDialog {
                 //verify the details
                 //printout a msg
                 authorizePayment();
+            }
+        });
+
+        applyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //based on the promo code: eg 15OFF , 20OFF
+                //subtract 15% of the subtotal we get from the order summary
+                //reflect new subtotal
             }
         });
 
@@ -70,7 +76,13 @@ public class Checkout extends JDialog {
 
     //main method to test it
     public static void main(String[] args) {
-        Checkout chk = new Checkout(null);
+        try {
+            UIManager.setLookAndFeel(new FlatDarculaLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
+
+        Checkout mycheckout = new Checkout(null);
     }
 
 }
