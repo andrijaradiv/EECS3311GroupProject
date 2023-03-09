@@ -20,10 +20,15 @@ public class Checkout extends JDialog {
     private JLabel iconLabel1;
     private JLabel iconLabel2;
     private JLabel iconLabel3;
+    private JLabel totalLabel;
 
     ImageIcon icon1 = new ImageIcon("img/visaNew.png");
     ImageIcon icon2 = new ImageIcon("img/amex.png");
     ImageIcon icon3 = new ImageIcon("img/paypal.png");
+
+    Cart cart = new Cart();
+    double cartTotal = cart.getTotal();
+
     public Checkout(JFrame parent) {
         super(parent);
         setTitle("Checkout");
@@ -39,6 +44,8 @@ public class Checkout extends JDialog {
         iconLabel2.setIcon(icon2);
         iconLabel3.setText("");
         iconLabel3.setIcon(icon3);
+
+        totalLabel.setText("Total:" + " " + String.format("%.2f",cartTotal));
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
