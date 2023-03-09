@@ -17,7 +17,13 @@ public class Checkout extends JDialog {
     private JPanel checkoutPanel;
     private JTextField tfPromoCode;
     private JButton applyButton;
+    private JLabel iconLabel1;
+    private JLabel iconLabel2;
+    private JLabel iconLabel3;
 
+    ImageIcon icon1 = new ImageIcon("img/visaNew.png");
+    ImageIcon icon2 = new ImageIcon("img/amex.png");
+    ImageIcon icon3 = new ImageIcon("img/paypal.png");
     public Checkout(JFrame parent) {
         super(parent);
         setTitle("Checkout");
@@ -27,6 +33,12 @@ public class Checkout extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
 
+        iconLabel1.setText("");
+        iconLabel1.setIcon(icon1);
+        iconLabel2.setText("");
+        iconLabel2.setIcon(icon2);
+        iconLabel3.setText("");
+        iconLabel3.setIcon(icon3);
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
