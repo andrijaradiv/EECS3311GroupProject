@@ -36,7 +36,11 @@ public class OrderSummary extends JDialog{
             cart.addItem(item);
             model.addRow(new Object[]{item.getName(), "$" + String.format("%.2f",item.getPrice())});
         }
-        model.addRow(new Object[]{"Total Price:", "$" + String.format("%.2f",cart.getTotal())});
+        model.addRow(new Object[]{"______________________"});
+        model.addRow(new Object[]{"Subtotal:", "$" + String.format("%.2f",cart.getSubTotal())});
+        model.addRow(new Object[]{"Tax:", "$" + String.format("%.2f",cart.getTax())});
+        model.addRow(new Object[]{"______________________"});
+        model.addRow(new Object[]{"Total:", "$" + String.format("%.2f",cart.getTotal())});
 
         orderSummaryPanel.add(new JScrollPane(table), BorderLayout.CENTER);
         table.setDefaultEditor(Object.class, null);

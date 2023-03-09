@@ -34,6 +34,14 @@ public class Cart {
         return totalPrice + (totalPrice * tax);
     }
 
+    public double getSubTotal() {
+        totalPrice = 0.0;
+        for(Item item: items){
+            totalPrice += item.getPrice() * item.getQuantity();
+        }
+        return totalPrice;
+    }
+
     public int getQuantity(){
         int quantity = 0;
         for (Item item: items){
