@@ -14,7 +14,6 @@ public class Checkout extends JDialog {
     private JTextField tfExpirationMonth;
     private JButton cancelButton;
     private JButton submitButton;
-    private JTextField tfExpirationYear;
     private JPanel checkoutPanel;
     private JTextField tfPromoCode;
     private JButton applyButton;
@@ -33,12 +32,14 @@ public class Checkout extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                //go back to the catalog page
+                Catalog myCatalog = new Catalog(null);
             }
         });
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //add card info to the database
+                //add card info to the database - insert into user profile
                 //verify the details
                 //printout a msg
                 authorizePayment();
@@ -63,14 +64,22 @@ public class Checkout extends JDialog {
         String billAddress = tfAddress.getText();
         String cvc = String.valueOf(tfCVC.getText());
         String expirationMonth = tfExpirationMonth.getText();
-        String expirationYear =  tfExpirationYear.getText();
+        //String expirationYear =  tfExpirationYear.getText();
 
-        if (cardNum.isEmpty() || cardName.isEmpty() || billAddress.isEmpty() || cvc.isEmpty() || expirationMonth.isEmpty() || expirationYear.isEmpty()) {
+        if (cardNum.isEmpty() || cardName.isEmpty() || billAddress.isEmpty() || cvc.isEmpty() || expirationMonth.isEmpty()) {
             JOptionPane.showMessageDialog(this,
                     "Please enter all fields",
                     "Try again",
                     JOptionPane.ERROR_MESSAGE);
-
+        }
+        // if credit card details verified successfully, print msg "Payment Successful!"
+        else{
+            JOptionPane.showMessageDialog(this, "Payment Successful!");
+            int choice = JOptionPane.showConfirmDialog(this, "Would you like to continue browsing?","", JOptionPane.YES_NO_OPTION);
+            dispose();
+            if(choice == JOptionPane.YES_OPTION) {
+                Catalog myCatalog = new Catalog(null);
+            }
         }
     }
 
