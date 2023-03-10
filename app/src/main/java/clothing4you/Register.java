@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Arrays;
 
 public class Register extends JDialog {
@@ -35,7 +36,13 @@ public class Register extends JDialog {
                 char[] confirmPassword = pfConfirmPass.getPassword();
 
                 if (Arrays.equals(password, confirmPassword)) {
-                    User user = new User(name, username, email, password);
+                    try {
+                        JDBC.insertUser(name, username, email, password.toString());
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    } catch (ClassNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     dispose();
                     Login myLogin = new Login(null);
                 } else {
