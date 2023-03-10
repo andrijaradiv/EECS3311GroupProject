@@ -75,10 +75,16 @@ public class OrderSummary extends JDialog{
         setVisible(true);
     }
 
+    //getter
+
+    public Cart getCart() {
+        return cart;
+    }
+    
     // Overloaded constructor
     public OrderSummary(JFrame parent, ArrayList<Item> items) throws SQLException, ClassNotFoundException {
         // implementation
-        this(parent, items, new Catalog(parent));
+        this(parent, items, new Catalog(parent
     }
 }
 
