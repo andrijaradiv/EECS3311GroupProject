@@ -61,7 +61,7 @@ public class OrderSummary extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Checkout myCheckout = new Checkout(null);
+                Checkout myCheckout = new Checkout(null, OrderSummary.this);
             }
         });
         button.add(checkout);
