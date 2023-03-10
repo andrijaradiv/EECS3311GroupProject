@@ -13,7 +13,7 @@ public class JDBC {
             "password TEXT" +
             ");";
 
-    public static String createCatalogTable = "CREATE TABLE users (" +
+    public static String createCatalogTable = "CREATE TABLE catalog (" +
             "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
             "name TEXT," +
             "category TEXT," +
@@ -71,7 +71,7 @@ public class JDBC {
         Connection conn = establishConnection();
         conn.setAutoCommit(false);
         Statement stmt = conn.createStatement();
-        String sqlStatement = "INSERT INTO users (name,category,size,quantity,price) " +
+        String sqlStatement = "INSERT INTO catalog (name,category,size,quantity,price) " +
                 "VALUES ('" + name + "','" + category + "','" + size + "','" +quantity +"','"+ price + "');";
         stmt.executeUpdate(sqlStatement);
 
@@ -130,7 +130,7 @@ public class JDBC {
         createTable("users", createUserTable);
         insertUser("andrija", "a@gmail.com","andrija121", "1234");
         insertUser("willy",  "willlego@gmail.com","willo1053", "1234");
-        ArrayList a = query("users", "username");
+        ArrayList a = query("catalog", "username");
         System.out.println(a);
         System.out.println(exists("wow14266", "users", "username"));
     }

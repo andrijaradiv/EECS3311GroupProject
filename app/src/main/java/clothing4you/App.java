@@ -20,7 +20,7 @@ public class App {
             System.err.println("Failed to initialize LaF");
         }
         createTable("users", createUserTable);
-        createTable("users", createCatalogTable);
+        createTable("catalog", createCatalogTable);
         insertUser("admin", "admin@gmail.com", "admin", "admin");
         insertItem("T-shirt", "Tops", "M", 1, 20.00);
         insertItem("Hoodie", "Tops", "M", 1, 25.00);
