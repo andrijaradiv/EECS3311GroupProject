@@ -97,7 +97,7 @@ public class Catalog extends JDialog {
         catalogPanel.add(filter, BorderLayout.NORTH);
         cmCategory.setSelectedItem("All");
 
-
+        // Back button
         JPanel button = new JPanel();
         JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {
@@ -109,6 +109,7 @@ public class Catalog extends JDialog {
         });
         button.add(back);
 
+        // Checkout button
         JButton checkout = new JButton("CheckOut");
         checkout.addActionListener(new ActionListener() {
             @Override
@@ -119,17 +120,18 @@ public class Catalog extends JDialog {
         });
         button.add(checkout);
 
-
+        // My WishList button
         JButton wishlist = new JButton("My WishList");
         wishlist.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                WishlistPage myWishList = new WishlistPage(null, cart.getItems());
+                WishlistPage myWishList = new WishlistPage(null, wl.getItems(), Catalog.this);
             }
         });
         button.add(wishlist);
 
+        // Return button
         JButton returnBtn = new JButton("Return");
         returnBtn.addActionListener(new ActionListener() {
             @Override
@@ -145,6 +147,7 @@ public class Catalog extends JDialog {
         JPanel buttonOne = new JPanel();
         buttonOne.setLayout(new BoxLayout(buttonOne, BoxLayout.Y_AXIS));
 
+        // Add to Cart button
         JButton addToCart = new JButton("Add To Cart");
         addToCart.addActionListener(new ActionListener() {
             @Override
@@ -161,7 +164,7 @@ public class Catalog extends JDialog {
         });
         buttonOne.add(addToCart);
 
-
+        // Add To WishList
         JButton addToWishlist = new JButton("Add To WishList");
         //wishlist.setPreferredSize(new Dimension(120,30));
         addToWishlist.addActionListener(new ActionListener() {
