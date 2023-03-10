@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class JDBC {
     private static String url = "jdbc:sqlite:/sqlite/clothing4you";
-    public static String createUserTable = "CREATE TABLE users (" +
+    public static String createUserTable = "CREATE TABLE IF NOT EXISTS users (" +
             "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
             "first_name TEXT," +
             "email TEXT," +
@@ -13,7 +13,7 @@ public class JDBC {
             "password TEXT" +
             ");";
 
-    public static String createCatalogTable = "CREATE TABLE catalog (" +
+    public static String createCatalogTable = "CREATE TABLE IF NOT EXISTS catalog (" +
             "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
             "name TEXT," +
             "category TEXT," +
@@ -46,7 +46,6 @@ public class JDBC {
         Connection conn = establishConnection();
         Statement stmt = conn.createStatement();
 
-        stmt.executeUpdate("drop table if exists " + table +";");
         stmt.executeUpdate(createTable);
         stmt.close();
         System.out.println("Table created successfully");
