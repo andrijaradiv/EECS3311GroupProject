@@ -76,7 +76,13 @@ public class WishlistPage extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                OrderSummary mySummary = new OrderSummary(null, cart.getItems());
+                try {
+                    OrderSummary mySummary = new OrderSummary(null, cart.getItems());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         button.add(checkout);

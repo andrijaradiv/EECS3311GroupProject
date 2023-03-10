@@ -16,3 +16,6 @@ out
 
 # Gabriel R's personal ignore
 *.un~
+
+# Ignore .txt files for testing. If .txt needed, remove
+*.txt
