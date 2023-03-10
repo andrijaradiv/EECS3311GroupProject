@@ -72,4 +72,10 @@ public class OrderSummary extends JDialog{
 
         setVisible(true);
     }
+
+    //getter
+
+    public Cart getCart() {
+        return cart;
+    }
 }

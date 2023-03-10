@@ -27,8 +27,9 @@ public class Checkout extends JDialog {
     ImageIcon icon2 = new ImageIcon("img/amex.png");
     ImageIcon icon3 = new ImageIcon("img/paypal.png");
 
-    Cart cart = new Cart();
-    double cartTotal = cart.getTotal();
+
+
+
 
     public Checkout(JFrame parent, OrderSummary previousSummary) {
         super(parent);
@@ -46,7 +47,9 @@ public class Checkout extends JDialog {
         iconLabel3.setText("");
         iconLabel3.setIcon(icon3);
 
-        totalLabel.setText("Total:" + " " + String.format("%.2f",cartTotal));
+        Cart cart = previousSummary.getCart();
+        double cartTotal = cart.getTotal();
+        totalLabel.setText("Total: " + " " + String.format("%.2f",cartTotal));
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
