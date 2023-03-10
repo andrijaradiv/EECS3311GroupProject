@@ -10,3 +10,9 @@ out
 
 # Ignore Jar Files
 *.jar
+
+# Ignore Database Files
+*.db
+
+# Gabriel R's personal ignore
+*.un~
