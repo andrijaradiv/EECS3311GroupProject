@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class WishlistPage extends JDialog {
@@ -43,7 +44,13 @@ public class WishlistPage extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Catalog myCatalog = new Catalog(null);
+                try {
+                    Catalog myCatalog = new Catalog(null);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         button.add(back);
@@ -69,7 +76,13 @@ public class WishlistPage extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                OrderSummary mySummary = new OrderSummary(null, cart.getItems());
+                try {
+                    OrderSummary mySummary = new OrderSummary(null, cart.getItems());
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         button.add(checkout);
