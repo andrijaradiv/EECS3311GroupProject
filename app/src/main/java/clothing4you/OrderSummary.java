@@ -73,4 +73,13 @@ public class OrderSummary extends JDialog{
 
         setVisible(true);
     }
+
+    // Overloaded constructor
+    public OrderSummary(JFrame parent, ArrayList<Item> items) {
+        // implementation
+        this(parent, items, new Catalog(parent));
+    }
 }
+
+
+
