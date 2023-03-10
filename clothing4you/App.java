@@ -21,7 +21,7 @@ public class App {
         }
         createTable("users", createUserTable);
         createTable("users", createCatalogTable);
-        insertUser("admin", "admin", "admin@gmail.com", "admin", "admin");
+        insertUser("admin", "admin@gmail.com", "admin", "admin");
         insertItem("T-shirt", "Tops", "M", 1, 20.00);
         insertItem("Hoodie", "Tops", "M", 1, 25.00);
         insertItem("Jeans", "Bottoms", "M", 1, 20.00);
