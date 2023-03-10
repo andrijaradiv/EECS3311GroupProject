@@ -8,7 +8,6 @@ public class JDBC {
     public static String createUserTable = "CREATE TABLE users (" +
             "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
             "first_name TEXT," +
-            "last_name TEXT," +
             "email TEXT," +
             "username TEXT," +
             "password TEXT" +
@@ -53,14 +52,14 @@ public class JDBC {
         System.out.println("Table created successfully");
     }
 
-   public static void insertUser(String first_name, String last_name, String email,String username, String password) throws SQLException, ClassNotFoundException {
+   public static void insertUser(String first_name, String email,String username, String password) throws SQLException, ClassNotFoundException {
         // Inserts user into user table to allow for data query
 
         Connection conn = establishConnection();
         conn.setAutoCommit(false);
         Statement stmt = conn.createStatement();
-        String sqlStatement = "INSERT INTO users (first_name,last_name,email,username,password) " +
-               "VALUES ('" + first_name + "','" + last_name + "','" + email + "','" +username +"','"+ password + "');";
+        String sqlStatement = "INSERT INTO users (first_name,email,username,password) " +
+               "VALUES ('" + first_name + "','" + email + "','" +username +"','"+ password + "');";
         stmt.executeUpdate(sqlStatement);
 
         conn.commit();
@@ -98,7 +97,11 @@ public class JDBC {
                 result.add(name + " " + category + " " + size + " " + quantity + " " + price);
             }
             else {
-                result.add(resultSet.getString(column_name));
+                String first_name = (resultSet.getString("name"));
+                String email = (resultSet.getString("category"));
+                String username = (resultSet.getString("size"));
+                String password = (resultSet.getString("quantity"));
+                result.add(first_name + " " + email + " " + username + " " + password);
             }
             //System.out.println(resultSet.getString("email"));
         }
@@ -125,8 +128,8 @@ public class JDBC {
     // For reference
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         createTable("users", createUserTable);
-        insertUser("andrija", "rad", "a@gmail.com","andrija121", "1234");
-        insertUser("willy", "lego", "willlego@gmail.com","willo1053", "1234");
+        insertUser("andrija", "a@gmail.com","andrija121", "1234");
+        insertUser("willy",  "willlego@gmail.com","willo1053", "1234");
         ArrayList a = query("users", "username");
         System.out.println(a);
         System.out.println(exists("wow14266", "users", "username"));
