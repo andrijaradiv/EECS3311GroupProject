@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static clothing4you.JDBC.exists;
+import static clothing4you.JDBC.query;
+
 public class Return extends JDialog{
     private JPanel returnPanel;
     private JSpinner quantitySpinner;
@@ -34,7 +37,13 @@ public class Return extends JDialog{
         submitBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                successfulReturn();
+                try {
+                    successfulReturn();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -55,18 +64,19 @@ public class Return extends JDialog{
         setVisible(true);
     }
 
-    public void successfulReturn(){
+    public void successfulReturn() throws SQLException, ClassNotFoundException {
         String itemName = nameTF.getText();
         int quantity = (int) quantitySpinner.getValue();
-        boolean itemExist = true;
+        boolean itemExist = exists(itemName, "catalog", "name");
+        System.out.println(itemExist);
 
-        for (Item item : items) {
-            if (item.getName().equalsIgnoreCase(itemName)) {
-                itemExist = true;
-                // perform the return submission for this item
-                break;
-            }
-        }
+//        for (Item item : items) {
+//            if (item.getName().equalsIgnoreCase(itemName)) {
+//                itemExist = true;
+//                // perform the return submission for this item
+//                break;
+//            }
+//        }
 
         if (itemExist) {
             JOptionPane.showMessageDialog(null, "Your return submission was submitted successfully.");
