@@ -37,7 +37,7 @@ public class Register extends JDialog {
 
                 if (Arrays.equals(password, confirmPassword)) {
                     try {
-                        JDBC.insertUser(name, username, email, password.toString());
+                        JDBC.insertUser(name, email, username, password.toString());
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     } catch (ClassNotFoundException ex) {
