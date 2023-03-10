@@ -36,13 +36,7 @@ public class Register extends JDialog {
                 char[] confirmPassword = pfConfirmPass.getPassword();
 
                 if (Arrays.equals(password, confirmPassword)) {
-                    try {
-                        JDBC.insertUser(name, email, username, password.toString());
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (ClassNotFoundException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    UserManager.register(name, email, username, password.toString());
                     dispose();
                     Login myLogin = new Login(null);
                 } else {

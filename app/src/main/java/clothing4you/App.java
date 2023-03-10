@@ -21,13 +21,6 @@ public class App {
         }
         createTable("users", createUserTable);
         createTable("catalog", createCatalogTable);
-        insertUser("admin", "admin@gmail.com", "admin", "admin");
-        insertItem("T-shirt", "Tops", "M", 1, 20.00);
-        insertItem("Hoodie", "Tops", "M", 1, 25.00);
-        insertItem("Jeans", "Bottoms", "M", 1, 20.00);
-        insertItem("Shorts", "Bottoms", "M", 1, 25.00);
-        insertItem("Beanie", "Hats", "M", 1, 7.50);
-        insertItem("Hat", "Hats", "M", 1, 7.50);
 
         Login myLogin = new Login(null);
     }

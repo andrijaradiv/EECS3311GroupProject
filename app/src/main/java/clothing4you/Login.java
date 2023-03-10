@@ -37,8 +37,9 @@ public class Login extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 String username = tfUsername.getText();
                 char[] password = pfPassword.getPassword();
-                dispose();
+                // dispose();
                 try {
+                    UserManager.login(username, password.toString());
                     Catalog myCatalog = new Catalog(null);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
@@ -70,6 +71,4 @@ public class Login extends JDialog {
 
         setVisible(true);
     }
-
-
 }
