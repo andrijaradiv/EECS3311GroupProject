@@ -99,7 +99,7 @@ public class Catalog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                OrderSummary mySummary = new OrderSummary(null, cart.getItems());
+                OrderSummary mySummary = new OrderSummary(null, cart.getItems(), Catalog.this);
             }
         });
         button.add(checkout);
