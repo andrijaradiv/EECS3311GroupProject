@@ -14,6 +14,15 @@ public class JDBC {
             "password TEXT" +
             ");";
 
+    public static String createCatalogTable = "CREATE TABLE users (" +
+            "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "name TEXT," +
+            "category TEXT," +
+            "size TEXT," +
+            "quantity INTEGER," +
+            "price FLOAT(2)" +
+            ");";
+
     public JDBC() throws SQLException, ClassNotFoundException {
     }
 
@@ -26,7 +35,8 @@ public class JDBC {
             Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection("jdbc:sqlite:clothing4you.db");
 
-        } catch ( Exception e ) {
+        } catch (Exception e) {
+            System.out.println(e);
         }
         return conn;
     }
@@ -56,6 +66,19 @@ public class JDBC {
         conn.commit();
         conn.close();
    }
+    public static void insertItem(String name, String category, String size, int quantity, double price) throws SQLException, ClassNotFoundException {
+        // Inserts user into user table to allow for data query
+
+        Connection conn = establishConnection();
+        conn.setAutoCommit(false);
+        Statement stmt = conn.createStatement();
+        String sqlStatement = "INSERT INTO users (name,category,size,quantity,price) " +
+                "VALUES ('" + name + "','" + category + "','" + size + "','" +quantity +"','"+ price + "');";
+        stmt.executeUpdate(sqlStatement);
+
+        conn.commit();
+        conn.close();
+    }
 
     public static ArrayList query(String table, String column_name) throws SQLException, ClassNotFoundException {
         // Queries given table and returns array with data in column_name
@@ -91,11 +114,11 @@ public class JDBC {
     }
     // For reference
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-//        createTable("users", createUserTable);
-//        insertUser("andrija", "rad", "a@gmail.com","andrija121", "1234");
-//        insertUser("willy", "lego", "willlego@gmail.com","willo1053", "1234");
-//        ArrayList a = query("users", "username");
-//        System.out.println(a);
-//        System.out.println(exists("wow14266", "users", "username"));
+        createTable("users", createUserTable);
+        insertUser("andrija", "rad", "a@gmail.com","andrija121", "1234");
+        insertUser("willy", "lego", "willlego@gmail.com","willo1053", "1234");
+        ArrayList a = query("users", "username");
+        System.out.println(a);
+        System.out.println(exists("wow14266", "users", "username"));
     }
 }
