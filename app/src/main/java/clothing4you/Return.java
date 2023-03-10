@@ -22,7 +22,7 @@ public class Return extends JDialog{
 
     public Return(JFrame parent, ArrayList<Item> items){
         super(parent);
-        setTitle("Login");
+        setTitle("Return");
         setContentPane(returnPanel);
         setMinimumSize(new Dimension(600, 600));
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
