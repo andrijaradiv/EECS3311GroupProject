@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Arrays;
 
 public class Register extends JDialog {
@@ -35,7 +36,7 @@ public class Register extends JDialog {
                 char[] confirmPassword = pfConfirmPass.getPassword();
 
                 if (Arrays.equals(password, confirmPassword)) {
-                    User user = new User(name, username, email, password);
+                    UserManager.register(name, email, username, password.toString());
                     dispose();
                     Login myLogin = new Login(null);
                 } else {
@@ -52,20 +53,6 @@ public class Register extends JDialog {
             }
         });
         setVisible(true);
-    }
-
-    private static class User {
-        private String name;
-        private String username;
-        private String email;
-        private char[] password;
-
-        public User(String name, String username, String email, char[] password) {
-            this.name = name;
-            this.username = username;
-            this.email = email;
-            this.password = password;
-        }
     }
 }
 

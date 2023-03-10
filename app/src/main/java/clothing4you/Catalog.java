@@ -6,7 +6,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import static clothing4you.JDBC.query;
 
 
 public class Catalog extends JDialog {
@@ -16,6 +19,7 @@ public class Catalog extends JDialog {
     private DefaultTableModel model;
     private ArrayList<Item> items;
     private Cart cart;
+    private WishList wl;
 
     ImageIcon tShirt = new ImageIcon("img/shirt.png");
     ImageIcon hoodie = new ImageIcon("img/Hoodie.png");
@@ -24,7 +28,7 @@ public class Catalog extends JDialog {
     ImageIcon beanie = new ImageIcon("img/Beanie.png");
     ImageIcon hat = new ImageIcon("img/Hat.png");
 
-    public Catalog(JFrame parent) {
+    public Catalog(JFrame parent) throws SQLException, ClassNotFoundException {
         super(parent);
         setTitle("Catalog");
         catalogPanel = new JPanel(new BorderLayout());
@@ -36,15 +40,21 @@ public class Catalog extends JDialog {
 
 
         cart = new Cart();
-
+        wl = new WishList();
         items = new ArrayList<>();
 
-        items.add(new Item("T-shirt", "Tops", "M", 1, 20.00, tShirt));
-        items.add(new Item("Hoodie", "Tops", "M",1,25.00, hoodie));
-        items.add(new Item("Jeans", "Bottoms", "M",1, 20.00, jeans));
-        items.add(new Item("Shorts", "Bottoms", "M",1,15.00, shorts));
-        items.add(new Item("Beanie", "Hats", "M",1,7.50, beanie));
-        items.add(new Item("Hat", "Hats", "M",1,7.50, hat));
+        ArrayList result = query("catalog", "");
+        for (int i = 0; i < result.size(); i++) {
+            String[] splited = result.get(i).toString().split(" ");
+            items.add(new Item(splited[0], splited[1], splited[2], Integer.parseInt(splited[3]), Double.parseDouble(splited[4]), null));
+        }
+
+//        items.add(new Item("T-shirt", "Tops", "M", 1, 20.00, tShirt));
+//        items.add(new Item("Hoodie", "Tops", "M",1,25.00, hoodie));
+//        items.add(new Item("Jeans", "Bottoms", "M",1, 20.00, jeans));
+//        items.add(new Item("Shorts", "Bottoms", "M",1,15.00, shorts));
+//        items.add(new Item("Beanie", "Hats", "M",1,7.50, beanie));
+//        items.add(new Item("Hat", "Hats", "M",1,7.50, hat));
 
 
 
@@ -66,6 +76,20 @@ public class Catalog extends JDialog {
 
 
         JPanel filter = new JPanel();
+
+        JTextField searchField = new JTextField(10);
+        filter.add(searchField);
+
+        JButton search = new JButton("Search");
+        search.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String search = searchField.getText();
+                performSearch(search);
+            }
+        });
+        filter.add(search);
+
         cmCategory = new JComboBox<String>();
         cmCategory.addItem("All");
         cmCategory.addItem("Tops");
@@ -99,13 +123,41 @@ public class Catalog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                OrderSummary mySummary = new OrderSummary(null, cart.getItems(), Catalog.this);
+                try {
+                    OrderSummary mySummary = new OrderSummary(null, cart.getItems(), Catalog.this);
+                } catch (Exception er) {
+                    throw er;
+                }
             }
         });
         button.add(checkout);
+
+
+        JButton wishlist = new JButton("My WishList");
+        wishlist.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                WishlistPage myWishList = new WishlistPage(null, cart.getItems());
+            }
+        });
+        button.add(wishlist);
+
+        JButton returnBtn = new JButton("Return");
+        returnBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                Return myReturn = new Return(null,cart.getItems());
+            }
+        });
+        button.add(returnBtn);
+
         catalogPanel.add(button, BorderLayout.SOUTH);
 
-        JPanel button1 = new JPanel();
+        JPanel buttonOne = new JPanel();
+        buttonOne.setLayout(new BoxLayout(buttonOne, BoxLayout.Y_AXIS));
+
         JButton addToCart = new JButton("Add To Cart");
         addToCart.addActionListener(new ActionListener() {
             @Override
@@ -120,8 +172,26 @@ public class Catalog extends JDialog {
                 }
             }
         });
-        button1.add(addToCart);
-        catalogPanel.add(button1, BorderLayout.EAST);
+        buttonOne.add(addToCart);
+
+
+        JButton addToWishlist = new JButton("Add To WishList");
+        //wishlist.setPreferredSize(new Dimension(120,30));
+        addToWishlist.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = table.getSelectedRow();
+                if (row != -1) {
+                    Item item = items.get(row);
+                    wl.addItem(item);
+                    JOptionPane.showMessageDialog(catalogPanel, item.getName() + " added to wishlist.");
+                } else {
+                    JOptionPane.showMessageDialog(catalogPanel, "Please select an item that is available.");
+                }
+            }
+        });
+        buttonOne.add(addToWishlist);
+        catalogPanel.add(buttonOne, BorderLayout.EAST);
 
 
         setVisible(true);
@@ -149,6 +219,15 @@ public class Catalog extends JDialog {
                 return label;
             }
         });
+    }
+
+    private void performSearch(String search) {
+        model.setRowCount(0);
+        for (Item item : items) {
+            if (item.getName().toLowerCase().contains(search.toLowerCase())) {
+                model.addRow(new Object[] { item.getName(), item.getSize(), "$" + String.format("%.2f",item.getPrice()), item.getImage() });
+            }
+        }
     }
 
 

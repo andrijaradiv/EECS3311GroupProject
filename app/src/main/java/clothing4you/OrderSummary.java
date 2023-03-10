@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrderSummary extends JDialog{
@@ -44,6 +45,7 @@ public class OrderSummary extends JDialog{
         model.addRow(new Object[]{"Total:", "$" + String.format("%.2f",cart.getTotal())});
 
         orderSummaryPanel.add(new JScrollPane(table), BorderLayout.CENTER);
+        table.setDefaultEditor(Object.class, null);
 
         JPanel button = new JPanel();
         JButton back = new JButton("Back");
@@ -78,4 +80,13 @@ public class OrderSummary extends JDialog{
     public Cart getCart() {
         return cart;
     }
+    
+    // Overloaded constructor
+    public OrderSummary(JFrame parent, ArrayList<Item> items) throws SQLException, ClassNotFoundException {
+        // implementation
+        this(parent, items, new Catalog(parent
+    }
 }
+
+
+

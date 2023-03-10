@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import com.formdev.flatlaf.FlatDarculaLaf;
 
 public class Checkout extends JDialog {
@@ -65,7 +67,13 @@ public class Checkout extends JDialog {
                 //add card info to the database - insert into user profile
                 //verify the details
                 //printout a msg
-                authorizePayment();
+                try {
+                    authorizePayment();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -81,7 +89,7 @@ public class Checkout extends JDialog {
         setVisible(true);
     }
 
-    private void authorizePayment() {
+    private void authorizePayment() throws SQLException, ClassNotFoundException {
         String cardName = tfCardName.getText();
         String cardNum = String.valueOf(tfCardNum.getText());
         String billAddress = tfAddress.getText();
