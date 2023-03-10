@@ -21,6 +21,7 @@ public class Checkout extends JDialog {
     private JLabel iconLabel2;
     private JLabel iconLabel3;
     private JLabel totalLabel;
+    private OrderSummary previousSummary;
 
     ImageIcon icon1 = new ImageIcon("img/visaNew.png");
     ImageIcon icon2 = new ImageIcon("img/amex.png");
@@ -29,7 +30,7 @@ public class Checkout extends JDialog {
     Cart cart = new Cart();
     double cartTotal = cart.getTotal();
 
-    public Checkout(JFrame parent) {
+    public Checkout(JFrame parent, OrderSummary previousSummary) {
         super(parent);
         setTitle("Checkout");
         setContentPane(checkoutPanel);
@@ -37,7 +38,7 @@ public class Checkout extends JDialog {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
         setLocationRelativeTo(parent);
-
+        this.previousSummary = previousSummary;
         iconLabel1.setText("");
         iconLabel1.setIcon(icon1);
         iconLabel2.setText("");
@@ -51,8 +52,8 @@ public class Checkout extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                //go back to the catalog page
-                Catalog myCatalog = new Catalog(null);
+                //go back to the summary page
+                previousSummary.setVisible(true);
             }
         });
         submitButton.addActionListener(new ActionListener() {
@@ -94,7 +95,9 @@ public class Checkout extends JDialog {
         // if credit card details verified successfully, print msg "Payment Successful!"
         else{
             JOptionPane.showMessageDialog(this, "Payment Successful!");
-            int choice = JOptionPane.showConfirmDialog(this, "Would you like to continue browsing?","", JOptionPane.YES_NO_OPTION);
+            int choice = JOptionPane.showConfirmDialog(this,
+                    "Would you like to continue browsing?",
+                    "", JOptionPane.YES_NO_OPTION);
             dispose();
             if(choice == JOptionPane.YES_OPTION) {
                 Catalog myCatalog = new Catalog(null);
@@ -103,7 +106,7 @@ public class Checkout extends JDialog {
     }
 
     //main method to test it
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(new FlatDarculaLaf());
         } catch (Exception ex) {
@@ -111,6 +114,6 @@ public class Checkout extends JDialog {
         }
 
         Checkout mycheckout = new Checkout(null);
-    }
+    }*/
 
 }
