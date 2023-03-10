@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrderSummary extends JDialog{
@@ -13,9 +14,8 @@ public class OrderSummary extends JDialog{
     private JTable table;
     private DefaultTableModel model;
     private Cart cart;
-    private Catalog previousCatalog;
 
-    public OrderSummary(JFrame parent, ArrayList<Item> items, Catalog previousCatalog){
+    public OrderSummary(JFrame parent, ArrayList<Item> items){
         super(parent);
         setTitle("Order Summary");
         orderSummaryPanel = new JPanel(new BorderLayout());
@@ -24,7 +24,7 @@ public class OrderSummary extends JDialog{
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setModal(true);
         setLocationRelativeTo(parent);
-        this.previousCatalog = previousCatalog;
+
         this.items = items;
         cart = new Cart();
 
@@ -52,8 +52,13 @@ public class OrderSummary extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                //Catalog myCatalog = new Catalog(null);
-                previousCatalog.setVisible(true);
+                try {
+                    Catalog myCatalog = new Catalog(null);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         button.add(back);

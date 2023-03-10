@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Return extends JDialog{
@@ -41,7 +42,13 @@ public class Return extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Catalog myCatalog = new Catalog(null);
+                try {
+                    Catalog myCatalog = new Catalog(null);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
