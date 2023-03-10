@@ -68,18 +68,22 @@ public class Return extends JDialog{
         String itemName = nameTF.getText();
         int quantity = (int) quantitySpinner.getValue();
         boolean itemExist = exists(itemName, "catalog", "name");
-        System.out.println(itemExist);
+        double price = 0;
+        ArrayList result = query("catalog", "");
 
-//        for (Item item : items) {
-//            if (item.getName().equalsIgnoreCase(itemName)) {
-//                itemExist = true;
-//                // perform the return submission for this item
-//                break;
-//            }
-//        }
+        for (int i = 0; i < result.size(); i++) {
+            if (result.get(i).toString().contains(itemName)) {
+                String[] splited = result.get(i).toString().split(" ");
+                price = Double.parseDouble(splited[4]);
+                // perform the return submission for this item
+                break;
+            }
+        }
+
+        price = price * 0.5;
 
         if (itemExist) {
-            JOptionPane.showMessageDialog(null, "Your return submission was submitted successfully.");
+            JOptionPane.showMessageDialog(null, "Thank you for your return. Here is your partial refund off 50%: $"+price);
 
             // preform the return submission
         } else {
